@@ -1,9 +1,10 @@
 <template>
   <div>
     <p class="addnew">
-      
-      <router-link class="btn btn-primary" :to="{name:'addcontact'}">새로운 연락처 추가하기</router-link>
-      
+      <router-link class="btn btn-primary" :to="{ name: 'addcontact' }"
+        >새로운 연락처 추가하기</router-link
+      >
+
       <!-- <button class="btn btn-style1" @click="addContact()">새로운 연락처 추가하기</button> -->
       <!-- <button class="btn btn-style1" @click="autoAddContact(10)">테스트 계정 10개 추가하기</button> -->
     </p>
@@ -20,9 +21,9 @@
         </thead>
         <tbody id="contacts">
           <tr v-for="contact in contactlist.contacts" :key="contact.no">
-            <td>{{contact.name}}</td>
-            <td>{{contact.tel}}</td>
-            <td>{{contact.address}}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.tel }}</td>
+            <td>{{ contact.address }}</td>
             <td>
               <img class="thumbnail" :src="contact.photo" @click="editPhoto(contact.no)" />
             </td>
@@ -34,7 +35,8 @@
         </tbody>
       </table>
     </div>
-    <paginate class="page-buttons"
+    <paginate
+      class="page-buttons"
       ref="pagebuttons"
       :page-count="totalpage"
       :page-range="7"
@@ -51,7 +53,7 @@
 
 <script>
 import Constant from '../Constant';
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 import Paginate from 'vuejs-paginate';
 // import axios from 'axios';
 
@@ -66,41 +68,41 @@ export default {
   },
   mounted() {
     let page = 1;
-    if(this.$route.query && this.$route.query.page){
-      page=parseInt(this.$route.query.page);
+    if (this.$route.query && this.$route.query.page) {
+      page = parseInt(this.$route.query.page);
     }
-    this.$store.dispatch(Constant.FETCH_CONTACTS,{pageno:page});
-    this.$refs.pagebuttons.selected=page-1;
+    this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
+    this.$refs.pagebuttons.selected = page - 1;
   },
-    watch : {
-        '$route' : function(to) {
-            if (to.query.page && to.query.page != this.contactlist.pageno) {
-                let page = to.query.page;
-                this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno:page });
-                this.$refs.pagebuttons.selected = page-1;
-            }
-        }
-    },
+  watch: {
+    $route: function(to) {
+      if (to.query.page && to.query.page != this.contactlist.pageno) {
+        let page = to.query.page;
+        this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page });
+        this.$refs.pagebuttons.selected = page - 1;
+      }
+    }
+  },
   methods: {
     pageChanged(page) {
-      this.$router.push({name: 'contacts', query: {page:page}})
+      this.$router.push({ name: 'contacts', query: { page: page } });
       // this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno:page});
     },
     // addContact() {
     //   this.$store.dispatch(Constant.ADD_CONTACT_FORM);
     // },
-    editContact(no){
-      this.$router.push({name: 'updatecontact', params:{no:no}})
+    editContact(no) {
+      this.$router.push({ name: 'updatecontact', params: { no: no } });
       // this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no:no});
     },
     deleteContact(no) {
       if (confirm('정말로 삭제하시겠습니까?') == true) {
-        this.$store.dispatch(Constant.DELETE_CONTACT, {no:no});
-        this.$router.push({name: 'contacts'})
+        this.$store.dispatch(Constant.DELETE_CONTACT, { no: no });
+        this.$router.push({ name: 'contacts' });
       }
     },
     editPhoto(no) {
-      this.$router.push({name: 'updatephoto', params: {no:no}})
+      this.$router.push({ name: 'updatephoto', params: { no: no } });
       // this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
     }
   }
@@ -108,20 +110,20 @@ export default {
 </script>
 
 <style scoped>
-#list .btn-style1:first-of-type{
-    margin-right: 10px;
+#list .btn-style1:first-of-type {
+  margin-right: 10px;
 }
 
-.btn-style1{
-    background: #34a88f;
-    color: white;
-    font-weight: bold;
+.btn-style1 {
+  background: #34a88f;
+  color: white;
+  font-weight: bold;
 }
 
-.btn-style1:hover{
-    background: #177e68;
-    color: white;
-    font-weight: bold;
+.btn-style1:hover {
+  background: #177e68;
+  color: white;
+  font-weight: bold;
 }
 
 .addnew {

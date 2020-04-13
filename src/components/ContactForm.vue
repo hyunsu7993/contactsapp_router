@@ -1,11 +1,11 @@
 <template>
   <div class="modal">
     <div class="form" @keyup.esc="cancelEvent">
-      <h3 class="heading">:: {{headingText}}</h3>
-        <div v-if="mode=='update'"  class="form-group">
-            <label>일련번호</label>
-            <input type="text" name="no" class="long" disabled v-model="contact.no" />
-        </div>
+      <h3 class="heading">:: {{ headingText }}</h3>
+      <div v-if="mode == 'update'" class="form-group">
+        <label>일련번호</label>
+        <input type="text" name="no" class="long" disabled v-model="contact.no" />
+      </div>
       <div class="form-group">
         <label>이름</label>
         <input
@@ -19,7 +19,13 @@
       </div>
       <div class="form-group">
         <label>전화번호</label>
-        <input type="text" name="tel" class="long" v-model="contact.tel" placeholder="전화번호를 입력하세요" />
+        <input
+          type="text"
+          name="tel"
+          class="long"
+          v-model="contact.tel"
+          placeholder="전화번호를 입력하세요"
+        />
       </div>
       <div class="form-group">
         <label>주 소</label>
@@ -33,7 +39,12 @@
       </div>
       <div class="form-group">
         <div>&nbsp;</div>
-        <input type="button" class="btn btn-primary" v-bind:value="btnText" @click="submitEvent()" />
+        <input
+          type="button"
+          class="btn btn-primary"
+          v-bind:value="btnText"
+          @click="submitEvent()"
+        />
         <input type="button" class="btn btn-primary" value="취 소" @click="cancelEvent()" />
       </div>
     </div>
@@ -41,53 +52,53 @@
 </template>
 
 <script>
-import Constant from "../Constant";
-import { mapState } from "vuex";
+import Constant from '../Constant';
+import { mapState } from 'vuex';
 
 export default {
-  name: "contactForm",
+  name: 'contactForm',
   data: function() {
-    return { mode: "add" };
+    return { mode: 'add' };
   },
-  props: ["no"],
+  props: ['no'],
   computed: {
     btnText() {
-      if (this.mode != "update") return "추 가";
-      else return "수 정";
+      if (this.mode != 'update') return '추 가';
+      else return '수 정';
     },
     headingText() {
-      if (this.mode != "update") return "새로운 연락처 추가";
-      else return "연락처 변경";
+      if (this.mode != 'update') return '새로운 연락처 추가';
+      else return '연락처 변경';
     },
-    ...mapState(["contact", "contactlist"])
+    ...mapState(['contact', 'contactlist'])
   },
   mounted() {
     this.$refs.name.focus();
     let cr = this.$router.currentRoute;
-    if (cr.fullPath.indexOf("/add") > -1) {
-      this.mode = "add";
+    if (cr.fullPath.indexOf('/add') > -1) {
+      this.mode = 'add';
       this.$store.dispatch(Constant.INITIALIZE_CONTACT_ONE);
-    } else if (cr.fullPath.indexOf("/update") > -1) {
-      this.mode = "update";
+    } else if (cr.fullPath.indexOf('/update') > -1) {
+      this.mode = 'update';
       this.$store.dispatch(Constant.FETCH_CONTACT_ONE, { no: this.no });
     }
   },
   methods: {
     submitEvent() {
-      if (this.mode == "update") {
+      if (this.mode == 'update') {
         this.$store.dispatch(Constant.UPDATE_CONTACT);
         this.$router.push({
-          name: "contacts",
+          name: 'contacts',
           query: { page: this.contactlist.pageno }
         });
       } else {
         this.$store.dispatch(Constant.ADD_CONTACT);
-        this.$router.push({ name: "contacts", query: { page: 1 } });
+        this.$router.push({ name: 'contacts', query: { page: 1 } });
       }
     },
     cancelEvent() {
       this.$router.push({
-        name: "contacts",
+        name: 'contacts',
         query: { page: this.contactlist.pageno }
       });
     }
@@ -113,7 +124,7 @@ export default {
   margin: 100px auto;
   max-width: 400px;
   min-width: 200px;
-  font: 13px "verdana";
+  font: 13px 'verdana';
   padding: 10px 10px 10px 10px;
 }
 .form div {
