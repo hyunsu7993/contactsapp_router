@@ -1,11 +1,11 @@
-  <template>
+<template>
   <div class="modal">
     <spinner class="spinner" :line-size="10" :size="100"></spinner>
   </div>
 </template>
- 
+
 <script>
-import Spinner from "vue-simple-spinner";
+import Spinner from 'vue-simple-spinner';
 export default {
   components: {
     Spinner

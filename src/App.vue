@@ -18,14 +18,11 @@
 
 <script>
 import Loading from './components/Loading';
-// import ContactList from "./components/ContactList";
-// import ContactForm from './components/ContactForm';
-// import UpdatePhoto from "./components/UpdatePhoto";
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
-  name: "app",
-  components : {Loading},
+  name: 'app',
+  components: { Loading },
   computed: mapState(['isloading'])
 };
 </script>
