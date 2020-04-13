@@ -25,31 +25,33 @@
 </template>
 
 <script>
-import Constant from "../Constant";
-import { mapState } from "vuex";
+import Constant from '../Constant';
+import { mapState } from 'vuex';
 export default {
-  name: "updatePhoto",
-  props: ["no"],
-  computed: mapState(["contact", "contactlist"]),
+  name: 'updatePhoto',
+  props: ['no'],
+  computed: mapState(['contact', 'contactlist']),
   mounted() {
     this.$store.dispatch(Constant.FETCH_CONTACT_ONE, { no: this.no });
   },
   methods: {
     cancelEvent() {
+      let msg = 'hello';
+      console.log(msg);
       this.$router.push({
-        name: "contacts",
+        name: 'contacts',
         query: { page: this.contactlist.pageno }
       });
       // this.$store.dispatch(Constant.CANCEL_FORM);
     },
     photoSubmit() {
-      var file = this.$refs.photofile.files[0];
+      let file = this.$refs.photofile.files[0];
       this.$store.dispatch(Constant.UPDATE_PHOTO, {
         no: this.contact.no,
         file: file
       });
       this.$router.push({
-        name: "contacts",
+        name: 'contacts',
         query: { page: this.contactlist.pageno }
       });
     }
@@ -78,7 +80,7 @@ export default {
   max-width: 400px;
   min-width: 200px;
   padding: 10px 10px 10px 10px;
-  font: 13px "verdana";
+  font: 13px 'verdana';
 }
 .form div {
   padding: 0;
