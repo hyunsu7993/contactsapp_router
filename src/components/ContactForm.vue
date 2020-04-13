@@ -63,7 +63,7 @@ export default {
   },
   mounted() {
     this.$refs.name.focus();
-    var cr = this.$router.currentRoute;
+    let cr = this.$router.currentRoute;
     if (cr.fullPath.indexOf("/add") > -1) {
       this.mode = "add";
       this.$store.dispatch(Constant.INITIALIZE_CONTACT_ONE);
