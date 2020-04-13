@@ -51,17 +51,17 @@ export default {
   },
   props: ["no"],
   computed: {
-    btnText: function() {
+    btnText() {
       if (this.mode != "update") return "추 가";
       else return "수 정";
     },
-    headingText: function() {
+    headingText() {
       if (this.mode != "update") return "새로운 연락처 추가";
       else return "연락처 변경";
     },
     ...mapState(["contact", "contactlist"])
   },
-  mounted: function() {
+  mounted() {
     this.$refs.name.focus();
     var cr = this.$router.currentRoute;
     if (cr.fullPath.indexOf("/add") > -1) {
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    submitEvent: function() {
+    submitEvent() {
       if (this.mode == "update") {
         this.$store.dispatch(Constant.UPDATE_CONTACT);
         this.$router.push({
@@ -85,7 +85,7 @@ export default {
         this.$router.push({ name: "contacts", query: { page: 1 } });
       }
     },
-    cancelEvent: function() {
+    cancelEvent() {
       this.$router.push({
         name: "contacts",
         query: { page: this.contactlist.pageno }

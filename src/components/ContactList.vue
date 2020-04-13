@@ -59,7 +59,7 @@ export default {
   name: 'contactList',
   components: { Paginate },
   computed: {
-    totalpage: function() {
+    totalpage() {
       return Math.floor((this.contactlist.totalcount - 1) / this.contactlist.pagesize) + 1;
     },
     ...mapState(['contactlist'])
@@ -82,24 +82,24 @@ export default {
         }
     },
   methods: {
-    pageChanged: function(page) {
+    pageChanged(page) {
       this.$router.push({name: 'contacts', query: {page:page}})
       // this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno:page});
     },
-    // addContact: function() {
+    // addContact() {
     //   this.$store.dispatch(Constant.ADD_CONTACT_FORM);
     // },
-    editContact: function(no){
+    editContact(no){
       this.$router.push({name: 'updatecontact', params:{no:no}})
       // this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no:no});
     },
-    deleteContact: function(no) {
+    deleteContact(no) {
       if (confirm('정말로 삭제하시겠습니까?') == true) {
         this.$store.dispatch(Constant.DELETE_CONTACT, {no:no});
         this.$router.push({name: 'contacts'})
       }
     },
-    editPhoto: function(no) {
+    editPhoto(no) {
       this.$router.push({name: 'updatephoto', params: {no:no}})
       // this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
     }
