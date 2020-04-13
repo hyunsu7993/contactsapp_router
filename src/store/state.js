@@ -2,7 +2,7 @@ import CONF from '../Config';
 
 export default {
     isloading: false,
-    contact: { no: 0, name: '', tel: '', address: '', photo: '' },
+    contact: { no: null, name: null, tel: null, address: null, photo: null },
     contactlist: {
         pageno: 1,
         pagesize: CONF.PAGESIZE,
