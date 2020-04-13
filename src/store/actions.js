@@ -7,12 +7,12 @@ export default {
         store.commit(Constant.CHANGE_ISLOADING, payload);
     },
     [Constant.FETCH_CONTACTS]: (store, payload) => {
-        var pageno;
+        let pageno;
         if (typeof payload === "undefined" || typeof payload.pageno === "undefined")
             pageno = 1;
         else
             pageno = payload.pageno;
-        var pagesize = store.state.contactlist.pagesize;
+        let pagesize = store.state.contactlist.pagesize;
         store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         axios.get(CONF.FETCH, {
             params: { pageno: pageno, pagesize: pagesize }
@@ -36,8 +36,8 @@ export default {
     },
     [Constant.UPDATE_CONTACT]: (store) => {
         store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
-        var currentPageNo = store.state.contactlist.pageno;
-        var contact = store.state.contact;
+        let currentPageNo = store.state.contactlist.pageno;
+        let contact = store.state.contact;
         axios.put(CONF.UPDATE.replace("${no}", contact.no), contact)
             .then((response) => {
                 if (response.data.status == "success") {
@@ -51,8 +51,8 @@ export default {
     },
     [Constant.UPDATE_PHOTO]: (store, payload) => {
         store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
-        var currentPageNo = store.state.contactlist.pageno;
-        var data = new FormData();
+        let currentPageNo = store.state.contactlist.pageno;
+        let data = new FormData();
         data.append('photo', payload.file);
         axios.post(CONF.UPDATE_PHOTO.replace("${no}", payload.no), data)
             .then(() => {
@@ -61,7 +61,7 @@ export default {
     },
     [Constant.DELETE_CONTACT]: (store, payload) => {
         store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
-        var currentPageNo = store.state.contactlist.pageno;
+        let currentPageNo = store.state.contactlist.pageno;
         axios.delete(CONF.DELETE.replace("${no}", payload.no))
             .then(() => {
                 store.dispatch(Constant.FETCH_CONTACTS, { pageno: currentPageNo });

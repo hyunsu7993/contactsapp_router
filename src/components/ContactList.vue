@@ -65,7 +65,7 @@ export default {
     ...mapState(['contactlist'])
   },
   mounted() {
-    var page = 1;
+    let page = 1;
     if(this.$route.query && this.$route.query.page){
       page=parseInt(this.$route.query.page);
     }
@@ -75,7 +75,7 @@ export default {
     watch : {
         '$route' : function(to) {
             if (to.query.page && to.query.page != this.contactlist.pageno) {
-                var page = to.query.page;
+                let page = to.query.page;
                 this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno:page });
                 this.$refs.pagebuttons.selected = page-1;
             }
